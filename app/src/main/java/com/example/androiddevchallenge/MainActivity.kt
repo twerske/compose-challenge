@@ -18,23 +18,20 @@ package com.example.androiddevchallenge
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
-import com.example.androiddevchallenge.list.PetListViewModel
 import com.example.androiddevchallenge.ui.theme.PetTheme
 
 class MainActivity : AppCompatActivity() {
-
-    private val viewModel by viewModels<PetListViewModel>()
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +48,21 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun AdoptionPetApp() {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = Screen.PetListScreen.route) {
-        composable(Screen.PetListScreen.route) {
+    NavHost(navController, startDestination = ScreenRoute.PET_LIST_SCREEN.route) {
+        composable(ScreenRoute.PET_LIST_SCREEN.route) {
             PetListScreen(navController, viewModel = viewModel())
         }
-        composable(Screen.PetDetailsScreen.route) {
-            PetDetailsScreen(navController, viewModel = viewModel())
+        composable(
+            ScreenRoute.PET_DETAILS_SCREEN.route,
+            arguments = listOf(navArgument("petId") {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            PetDetailsScreen(
+                navController,
+                petId = backStackEntry.arguments?.getString("petId"),
+                viewModel = viewModel()
+            )
         }
     }
 }

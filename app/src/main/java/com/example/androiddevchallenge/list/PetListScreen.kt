@@ -40,7 +40,7 @@ fun PetListScreen(navController: NavController, viewModel: PetListViewModel) {
                 ),
                 pets.value
             ) {
-                pet -> navController.navigate(Screen.PetDetailsScreen.route)
+                pet -> navController.navigate(Screen.PetDetailsScreen(pet.id).getCalculatedRoute())
             }
         }
     }

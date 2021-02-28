@@ -78,6 +78,7 @@ dependencies {
     implementation "dev.chrisbanes.accompanist:accompanist-coil:0.6.1"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-runtime-ktx:2.3.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
 
     testImplementation 'junit:junit:4.13.2'
 

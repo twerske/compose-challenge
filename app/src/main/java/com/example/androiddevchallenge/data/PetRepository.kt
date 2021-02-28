@@ -5,9 +5,15 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class PetRepository  {
+    private val pets = listOf(goat, pig, cat, dog)
+
     // FIX: API data in a world where this is real
     suspend fun getPetList(): List<Pet> {
-        return listOf(goat, pig, goat, pig, dog, dog, cat, goat)
+        return pets
+    }
+
+    suspend fun getPetById(id: String?): Pet? {
+        return pets.find { it.id == id }
     }
 }
 
@@ -24,7 +30,7 @@ val goat = Pet(
     LongLatLocale(25.3f, 23.12f)
 )
 val pig = Pet(
-    "1",
+    "2",
     "Fred",
     PetCategory.Barnyard,
     PetSpecies.Pig,
@@ -36,7 +42,7 @@ val pig = Pet(
     LongLatLocale(25.3f, 23.12f)
 )
 val dog = Pet(
-    "1",
+    "3",
     "Doggie",
     PetCategory.Dog,
     PetSpecies.Dog,
@@ -48,7 +54,7 @@ val dog = Pet(
     LongLatLocale(25.3f, 23.12f)
 )
 val cat = Pet(
-    "1",
+    "4",
     "Kittie",
     PetCategory.Cat,
     PetSpecies.Cat,
