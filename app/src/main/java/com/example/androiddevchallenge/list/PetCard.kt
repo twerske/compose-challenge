@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,9 +14,13 @@ import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun PetCard(pet: Pet) {
-    Card(modifier = Modifier.padding(4.dp)) {
-        Column() {
+fun PetCard(pet: Pet, onPetClick: (Pet) -> Unit) {
+    Card(
+        modifier = Modifier.padding(4.dp)
+            .clickable { onPetClick(pet) },
+        backgroundColor = MaterialTheme.colors.surface
+    ) {
+        Column {
             CoilImage(
                 data = pet.imageUrl,
                 contentDescription = null,

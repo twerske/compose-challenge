@@ -22,23 +22,25 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.list.PetListViewModel
+import com.example.androiddevchallenge.ui.theme.PetTheme
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<AdoptViewModel>()
+    private val viewModel by viewModels<PetListViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyTheme {
-                MyApp(viewModel = viewModel)
+            PetTheme {
+                AdoptionPetApp()
             }
         }
     }
@@ -47,10 +49,15 @@ class MainActivity : AppCompatActivity() {
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MyApp(viewModel: AdoptViewModel = AdoptViewModel()) {
-    val pets = viewModel.petsData.observeAsState(emptyList())
-    Surface(color = MaterialTheme.colors.background) {
-        PetGrid(pets.value)
+fun AdoptionPetApp() {
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = Screen.PetListScreen.route) {
+        composable(Screen.PetListScreen.route) {
+            PetListScreen(navController, viewModel = viewModel())
+        }
+        composable(Screen.PetDetailsScreen.route) {
+            PetDetailsScreen(navController, viewModel = viewModel())
+        }
     }
 }
 
@@ -58,8 +65,8 @@ fun MyApp(viewModel: AdoptViewModel = AdoptViewModel()) {
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-    MyTheme {
-        MyApp()
+    PetTheme {
+        AdoptionPetApp()
     }
 }
 
@@ -67,7 +74,7 @@ fun LightPreview() {
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
+    PetTheme(darkTheme = true) {
+        AdoptionPetApp()
     }
 }
