@@ -41,6 +41,6 @@ class AdoptViewModel : ViewModel() {
             LongLatLocale(25.3f, 23.12f)
         )
 
-        _animalsData.value = listOf(goat, pig)
+        _animalsData.value = listOf(goat, pig, goat, pig, goat, pig, goat, pig)
     }
 }

@@ -25,12 +25,12 @@ fun PetCard(pet: Pet) {
             )
             Text(
                 pet.name,
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.h3,
                 modifier = Modifier.padding(8.dp)
             )
             Text(
                 pet.species.toString(),
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.h6,
                 modifier = Modifier.padding(8.dp)
             )
         }
