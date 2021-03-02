@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -20,8 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.Pet
-import com.example.androiddevchallenge.PetCard
 import com.example.androiddevchallenge.data.PetCategory
 import kotlinx.coroutines.launch
 
@@ -55,14 +55,20 @@ fun PetGrid(modifier: Modifier, pets: Map<PetCategory, List<Pet>>, onPetClick: (
         }
 
         AnimatedVisibility(visible = showButton) {
-            ScrollToTopButton(
-                onClick = {
-                    coroutineScope.launch {
-                        // Animate scroll to the first item
-                        listState.animateScrollToItem(index = 0)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 8.dp, bottom = 8.dp),
+                verticalArrangement = Arrangement.Bottom) {
+                ScrollToTopButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            // Animate scroll to the first item
+                            listState.animateScrollToItem(index = 0)
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

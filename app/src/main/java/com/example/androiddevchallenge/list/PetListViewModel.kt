@@ -2,6 +2,8 @@ package com.example.androiddevchallenge.list
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,10 +24,7 @@ class PetListViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            val allAnimals = petRepository.getPetList()
-            val groupedAnimals = allAnimals.groupBy { it.category }
-
-            _petData.value = groupedAnimals
+            _petData.value = petRepository.getPetList()
         }
     }
 }

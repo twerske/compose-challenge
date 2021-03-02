@@ -5,12 +5,12 @@ import androidx.annotation.RequiresApi
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-class PetRepository  {
+class PetRepository() {
     private val pets = listOf(goat, pig, cat, dog, rabbit, hamster, lizard, snake, fish, axolotl, seahorse, horse, chicken, cow)
 
     // FIX: API data in a world where this is real
-    suspend fun getPetList(): List<Pet> {
-        return pets
+    suspend fun getPetList(): Map<PetCategory, List<Pet>> {
+        return pets.groupBy { it.category }
     }
 
     suspend fun getPetById(id: String?): Pet? {
@@ -29,7 +29,8 @@ val goat = Pet(
     ZonedDateTime.of(2019, 5, 6, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Female,
     2.0f,
-    LongLatLocale(51.05f, 21.41f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Jujube is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val pig = Pet(
@@ -42,7 +43,8 @@ val pig = Pet(
     ZonedDateTime.of(2017, 2, 2, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.NonBinary,
     2.0f,
-    LongLatLocale(-33.17f, 22.23f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Melon is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val dog = Pet(
@@ -55,7 +57,8 @@ val dog = Pet(
     ZonedDateTime.of(2021, 2, 2, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Male,
     2.0f,
-    LongLatLocale(38.9f, -77.0f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Yuzu is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val rabbit = Pet(
@@ -68,7 +71,8 @@ val rabbit = Pet(
     ZonedDateTime.of(2011, 7, 22, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Female,
     2.0f,
-    LongLatLocale(-6.88f, -45.08f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Carrot is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val hamster = Pet(
@@ -81,7 +85,8 @@ val hamster = Pet(
     ZonedDateTime.of(2020, 9, 20, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.NonBinary,
     2.0f,
-    LongLatLocale(10.785094f, 78.487445f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Mr. Romanescu is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val lizard = Pet(
@@ -94,7 +99,8 @@ val lizard = Pet(
     ZonedDateTime.of(2015, 2, 2, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Female,
     2.0f,
-    LongLatLocale(62.326822f, -158.817228f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Pitaya is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val snake = Pet(
@@ -107,7 +113,8 @@ val snake = Pet(
     ZonedDateTime.of(2013, 7, 1, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.NonBinary,
     2.0f,
-    LongLatLocale(34.411734f, -4.129738f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Lychee is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val fish = Pet(
@@ -120,7 +127,8 @@ val fish = Pet(
     ZonedDateTime.of(2020, 8, 14, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Male,
     2.0f,
-    LongLatLocale(43.033020f, 8.350730f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Kumquat is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val axolotl = Pet(
@@ -133,7 +141,8 @@ val axolotl = Pet(
     ZonedDateTime.of(2021, 1, 1, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Female,
     2.0f,
-    LongLatLocale(-24.891097f, 42.276510f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Avocado is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val seahorse = Pet(
@@ -146,7 +155,8 @@ val seahorse = Pet(
     ZonedDateTime.of(2017, 12, 12, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Male,
     2.0f,
-    LongLatLocale(20.422198f, -156.180510f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Fennel is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val horse = Pet(
@@ -159,7 +169,8 @@ val horse = Pet(
     ZonedDateTime.of(2013, 12, 5, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.NonBinary,
     2.0f,
-    LongLatLocale(41.603386f, -97.469576f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Artichoke is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val cat = Pet(
@@ -172,7 +183,8 @@ val cat = Pet(
     ZonedDateTime.of(2014, 10, 4, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Male,
     2.0f,
-    LongLatLocale(-31.925444f, 148.923947f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Radish is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val cow = Pet(
@@ -185,7 +197,8 @@ val cow = Pet(
     ZonedDateTime.of(2010, 11, 12, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.Female,
     2.0f,
-    LongLatLocale(20.826630f, -101.212765f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Cauliflower is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
 @RequiresApi(Build.VERSION_CODES.O)
 val chicken = Pet(
@@ -198,5 +211,6 @@ val chicken = Pet(
     ZonedDateTime.of(2018, 2, 8, 4, 5, 0, 0, ZoneId.systemDefault()),
     Gender.NonBinary,
     2.0f,
-    LongLatLocale(1.613301f, 116.755983f)
+    "78 Main Street, Bangkok, Thailand 🇹🇭",
+    "Popcorn is our favorite at our shelter. They are friendly with people and gentle when taking a treat. They would love to warm your house with her love this season."
 )
