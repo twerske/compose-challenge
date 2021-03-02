@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.data.Pet
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
@@ -30,7 +31,7 @@ fun PetCard(pet: Pet, onPetClick: (Pet) -> Unit) {
             )
             Text(
                 pet.name,
-                style = MaterialTheme.typography.h3,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier.padding(8.dp)
             )
             Text(

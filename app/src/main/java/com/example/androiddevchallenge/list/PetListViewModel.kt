@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.androiddevchallenge.Pet
-import com.example.androiddevchallenge.PetCategory
+import com.example.androiddevchallenge.data.Pet
+import com.example.androiddevchallenge.data.PetCategory
 import com.example.androiddevchallenge.data.PetRepository
 import kotlinx.coroutines.launch
 

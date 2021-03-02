@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.data
 
 import java.time.ZonedDateTime
 
