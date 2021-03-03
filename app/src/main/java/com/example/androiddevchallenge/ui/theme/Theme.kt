@@ -24,28 +24,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
-)
+    primary = skyBlue,
+    primaryVariant = indigo,
+    secondary = neonPink,
 
-private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
+    background = skyBlue,
+    surface = indigo,
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    onSurface = Color.Black
+)
+
+private val LightColorPalette = lightColors(
+    primary = neonPink,
+    primaryVariant = neonMagenta,
+    secondary = teal,
+    secondaryVariant = yellow,
+
+    // Other default colors to override
+    background = skyBlue,
+    surface = neonPink,
+    onPrimary = skyBlue,
+    onSecondary = indigo,
+    onBackground = lightBlue,
+    onSurface = skyBlue
 )
 
 val Colors.outlineColor: Color
-    get() = if(!isLight) darkGray else veryLightGray
+    get() = if(!isLight) teal else neonMagenta
 
 @Composable
 fun PetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -82,8 +83,8 @@ fun ScrollToTopButton(
 ) {
     FloatingActionButton(
         onClick = onClick,
-        backgroundColor = MaterialTheme.colors.surface,
-        contentColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.secondaryVariant,
+        contentColor = MaterialTheme.colors.onSurface,
 //        modifier = modifier.preferredSize(48.dp),
     ) {
         Icon(

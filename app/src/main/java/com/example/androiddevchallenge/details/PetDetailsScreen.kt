@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
@@ -11,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.runtime.Composable
@@ -30,8 +32,6 @@ import com.example.androiddevchallenge.data.Pet
 import com.example.androiddevchallenge.data.age
 import com.example.androiddevchallenge.data.pig
 import com.example.androiddevchallenge.ui.theme.outlineColor
-import com.example.androiddevchallenge.ui.theme.purple200
-import com.example.androiddevchallenge.ui.theme.teal200
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -81,12 +81,14 @@ fun PetDetails(pet: Pet, onBackPress : () -> Unit){
                         bottomStart = CornerSize(32.dp)
                     )
                 )
-        )
+                .border(BorderStroke(4.dp, MaterialTheme.colors.onBackground)),
+            )
         PetCardInformation(pet = pet)
         Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween){
             Text(text = pet.name,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.h4,
+                color = MaterialTheme.colors.secondary,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 0.dp)
             )
             Text(text = pet.breed + " " + pet.species,
@@ -111,6 +113,7 @@ fun PetDetails(pet: Pet, onBackPress : () -> Unit){
 fun AboutSection(pet: Pet){
     Text(text = stringResource(id = R.string.about_pet_heading),
         style = MaterialTheme.typography.h6,
+        color = MaterialTheme.colors.secondary,
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.padding(start = 16.dp, end = 16.dp)
     )
@@ -157,11 +160,11 @@ fun PetCardInformation(pet: Pet){
 @Composable
 fun InfoCard(pet: Pet, title: String, text: String){
     Card(modifier = Modifier
-        .padding(start = 8.dp, end = 8.dp, top = 8.dp)
-        .size(100.dp, 64.dp)
+        .padding(start = 2.dp, end = 2.dp, top = 8.dp)
+        .size(120.dp, 64.dp)
         .clip(MaterialTheme.shapes.medium),
-        elevation = 8.dp,
-        border = BorderStroke(1.dp, MaterialTheme.colors.outlineColor)
+//        elevation = 8.dp,
+        border = BorderStroke(4.dp, MaterialTheme.colors.outlineColor)
     ){
         if (text != "") {
             Column(verticalArrangement = Arrangement.Center){
@@ -202,22 +205,24 @@ fun AdoptButtonBar(){
         horizontalArrangement = Arrangement.Start) {
         Button(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(2.dp)
                 .weight(4f)
                 .height(52.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant),
+            border = BorderStroke(4.dp, MaterialTheme.colors.onBackground),
             onClick = { /*TODO*/ }) {
             Text(text = stringResource(id = R.string.adopt_button_title))
         }
         Button(
-            colors = ButtonDefaults.buttonColors(backgroundColor = teal200),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
             modifier = Modifier
-                .padding(top = 16.dp, bottom = 16.dp, end = 16.dp)
+                .padding(2.dp)
                 .weight(1f)
                 .wrapContentWidth()
                 .height(52.dp),
             onClick = { /*TODO*/ }) {
-            Icon(Icons.Filled.Phone, "phone",
-                tint = purple200,
+            Icon(Icons.Filled.Favorite, "favorite",
+                tint = MaterialTheme.colors.onSurface,
                 modifier = Modifier
                     .size(48.dp)
                     .padding(4.dp))
