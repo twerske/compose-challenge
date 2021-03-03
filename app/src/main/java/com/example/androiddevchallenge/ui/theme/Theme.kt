@@ -52,7 +52,7 @@ private val LightColorPalette = lightColors(
 )
 
 val Colors.outlineColor: Color
-    get() = if(!isLight) teal else neonMagenta
+    get() = if (!isLight) teal else neonMagenta
 
 @Composable
 fun PetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {

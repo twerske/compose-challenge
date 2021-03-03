@@ -59,9 +59,11 @@ fun AdoptionPetApp() {
         }
         composable(
             ScreenRoute.PET_DETAILS_SCREEN.route,
-            arguments = listOf(navArgument("petId") {
-                type = NavType.StringType
-            })
+            arguments = listOf(
+                navArgument("petId") {
+                    type = NavType.StringType
+                }
+            )
         ) { backStackEntry ->
             PetDetailsScreen(
                 navController,

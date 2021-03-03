@@ -1,6 +1,20 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.list
 
-import android.content.Context
 import android.graphics.BlurMaskFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
@@ -10,32 +24,33 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.LinearGradientShader
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.Typeface
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.Screen
-import com.example.androiddevchallenge.ui.theme.outlineColor
-import kotlinx.coroutines.CoroutineStart
 
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
@@ -46,7 +61,8 @@ fun PetListScreen(navController: NavController, viewModel: PetListViewModel) {
 
     Surface(color = MaterialTheme.colors.background) {
         Column {
-            Surface(color = MaterialTheme.colors.primaryVariant,
+            Surface(
+                color = MaterialTheme.colors.primaryVariant,
                 border = BorderStroke(4.dp, MaterialTheme.colors.primary),
                 modifier = Modifier.fillMaxWidth()
                     .clip(
@@ -58,8 +74,10 @@ fun PetListScreen(navController: NavController, viewModel: PetListViewModel) {
                         )
                     )
             ) {
-                Row(modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween){
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     drawGradientText(
                         text = stringResource(id = R.string.adoption_title),
 //                        style = MaterialTheme.typography.h2,
@@ -88,7 +106,8 @@ fun PetListScreen(navController: NavController, viewModel: PetListViewModel) {
                 ),
                 pets.value
             ) {
-                pet -> navController.navigate(Screen.PetDetailsScreen(pet.id).getCalculatedRoute())
+                pet ->
+                navController.navigate(Screen.PetDetailsScreen(pet.id).getCalculatedRoute())
             }
         }
     }

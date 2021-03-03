@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.details
 
 import android.os.Build
@@ -5,15 +20,12 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -56,14 +68,14 @@ fun PetDetailsScreen(navController: NavController, petId: String?, viewModel: Pe
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
-fun PetDetailsPreview(){
-    PetDetails(pet = pig, onBackPress = {  })
+fun PetDetailsPreview() {
+    PetDetails(pet = pig, onBackPress = { })
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun PetDetails(pet: Pet, onBackPress : () -> Unit){
+fun PetDetails(pet: Pet, onBackPress: () -> Unit) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
@@ -82,16 +94,20 @@ fun PetDetails(pet: Pet, onBackPress : () -> Unit){
                     )
                 )
                 .border(BorderStroke(4.dp, MaterialTheme.colors.onBackground)),
-            )
+        )
         PetCardInformation(pet = pet)
-        Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween){
-            Text(text = pet.name,
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = pet.name,
                 style = MaterialTheme.typography.h4,
                 color = MaterialTheme.colors.secondary,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 0.dp)
             )
-            Text(text = pet.breed + " " + pet.species,
+            Text(
+                text = pet.breed + " " + pet.species,
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 0.dp),
                 textAlign = TextAlign.End
@@ -104,25 +120,28 @@ fun PetDetails(pet: Pet, onBackPress : () -> Unit){
     Column(
         modifier = Modifier
             .fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom) {
+        verticalArrangement = Arrangement.Bottom
+    ) {
         AdoptButtonBar()
     }
 }
 
 @Composable
-fun AboutSection(pet: Pet){
-    Text(text = stringResource(id = R.string.about_pet_heading),
+fun AboutSection(pet: Pet) {
+    Text(
+        text = stringResource(id = R.string.about_pet_heading),
         style = MaterialTheme.typography.h6,
         color = MaterialTheme.colors.secondary,
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.padding(start = 16.dp, end = 16.dp)
     )
-    Text(text = pet.description,
+    Text(
+        text = pet.description,
         textAlign = TextAlign.Justify,
         style = MaterialTheme.typography.body1,
-        modifier = Modifier.padding(16.dp))
+        modifier = Modifier.padding(16.dp)
+    )
 }
-
 
 @Composable
 fun Location(pet: Pet) {
@@ -130,12 +149,14 @@ fun Location(pet: Pet) {
         modifier = Modifier.padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(Icons.Outlined.Place, null,
+        Icon(
+            Icons.Outlined.Place, null,
             modifier = Modifier
                 .width(16.dp)
                 .padding(end = 2.dp, top = 2.dp)
         )
-        Text(text = pet.location,
+        Text(
+            text = pet.location,
             style = MaterialTheme.typography.body1,
         )
     }
@@ -143,45 +164,56 @@ fun Location(pet: Pet) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PetCardInformation(pet: Pet){
+fun PetCardInformation(pet: Pet) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        InfoCard(pet, title = stringResource(id = R.string.age_title),
-            text = pet.dob.age())
-        InfoCard(pet, title = stringResource(id = R.string.weight_title),
-            text = "${pet.weight}lbs")
-        InfoCard(pet, title = stringResource(id = R.string.sex_title),
-            text = "")
+        InfoCard(
+            pet, title = stringResource(id = R.string.age_title),
+            text = pet.dob.age()
+        )
+        InfoCard(
+            pet, title = stringResource(id = R.string.weight_title),
+            text = "${pet.weight}lbs"
+        )
+        InfoCard(
+            pet, title = stringResource(id = R.string.sex_title),
+            text = ""
+        )
     }
 }
 
 @Composable
-fun InfoCard(pet: Pet, title: String, text: String){
-    Card(modifier = Modifier
-        .padding(start = 2.dp, end = 2.dp, top = 8.dp)
-        .size(120.dp, 64.dp)
-        .clip(MaterialTheme.shapes.medium),
+fun InfoCard(pet: Pet, title: String, text: String) {
+    Card(
+        modifier = Modifier
+            .padding(start = 2.dp, end = 2.dp, top = 8.dp)
+            .size(120.dp, 64.dp)
+            .clip(MaterialTheme.shapes.medium),
 //        elevation = 8.dp,
         border = BorderStroke(4.dp, MaterialTheme.colors.outlineColor)
-    ){
+    ) {
         if (text != "") {
-            Column(verticalArrangement = Arrangement.Center){
-                Text(text = title,
+            Column(verticalArrangement = Arrangement.Center) {
+                Text(
+                    text = title,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.caption
                 )
-                Text(text = text,
+                Text(
+                    text = text,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.SemiBold,
-                    style = MaterialTheme.typography.body1)
+                    style = MaterialTheme.typography.body1
+                )
             }
         } else {
             Column(verticalArrangement = Arrangement.Center) {
-                Text(text = title,
+                Text(
+                    text = title,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.caption
@@ -198,11 +230,12 @@ fun InfoCard(pet: Pet, title: String, text: String){
     }
 }
 
-
 @Composable
-fun AdoptButtonBar(){
-    Row(modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start) {
+fun AdoptButtonBar() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start
+    ) {
         Button(
             modifier = Modifier
                 .padding(2.dp)
@@ -210,7 +243,8 @@ fun AdoptButtonBar(){
                 .height(52.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant),
             border = BorderStroke(4.dp, MaterialTheme.colors.onBackground),
-            onClick = { /*TODO*/ }) {
+            onClick = { /*TODO*/ }
+        ) {
             Text(text = stringResource(id = R.string.adopt_button_title))
         }
         Button(
@@ -220,12 +254,15 @@ fun AdoptButtonBar(){
                 .weight(1f)
                 .wrapContentWidth()
                 .height(52.dp),
-            onClick = { /*TODO*/ }) {
-            Icon(Icons.Filled.Favorite, "favorite",
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                Icons.Filled.Favorite, "favorite",
                 tint = MaterialTheme.colors.onSurface,
                 modifier = Modifier
                     .size(48.dp)
-                    .padding(4.dp))
+                    .padding(4.dp)
+            )
         }
     }
 }
